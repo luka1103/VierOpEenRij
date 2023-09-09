@@ -1,63 +1,93 @@
 <style>
+    body {
+        background-color: lightgrey;
+    }
+    h1 {
+        text-transform: uppercase;
+        font-family: Verdana;
+        font-size: 37px;
+    }
     table, tr, td {
         border: 1px solid black;
         height: 50px;
+        border-collapse: collapse;
+        border-width: 7px;
+        border-color: #123456;
+    }
+    td:hover {
+        background-color: #98AFC7;
     }
 </style>
 
-<table width=350px>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-    </table>      
+<script>
+    function colorChanger(column_number) {
+        var row_number = 5
+        var x = document.getElementById("table").rows[row_number].cells[column_number];
+        console.log(x.style.backgroundColor)
+        while(x.style.backgroundColor == "rgb(255, 206, 68)"){
+            row_number -= 1
+            var x = document.getElementById("table").rows[row_number].cells[column_number]
+        }
+        x.style.backgroundColor = "rgb(255, 206, 68)";
+    }
+</script>
+
+<div>
+    <h1>Vier op een rij</h1>
+    <table width=350px id='table'>
+        <tr>
+            <td onclick='colorChanger(0)'></td>
+            <td onclick='colorChanger(1)'></td>
+            <td onclick='colorChanger(2)'></td>
+            <td onclick='colorChanger(3)'></td>
+            <td onclick='colorChanger(4)'></td>
+            <td onclick='colorChanger(5)'></td>
+            <td onclick='colorChanger(6)'></td>
+        </tr>
+        <tr>
+            <td onclick='colorChanger(0)'></td>
+            <td onclick='colorChanger(1)'></td>
+            <td onclick='colorChanger(2)'></td>
+            <td onclick='colorChanger(3)'></td>
+            <td onclick='colorChanger(4)'></td>
+            <td onclick='colorChanger(5)'></td>
+            <td onclick='colorChanger(6)'></td>
+        </tr>
+        <tr>
+            <td onclick='colorChanger(0)'></td>
+            <td onclick='colorChanger(1)'></td>
+            <td onclick='colorChanger(2)'></td>
+            <td onclick='colorChanger(3)'></td>
+            <td onclick='colorChanger(4)'></td>
+            <td onclick='colorChanger(5)'></td>
+            <td onclick='colorChanger(6)'></td>
+        </tr>
+        <tr>
+            <td onclick='colorChanger(0)'></td>
+            <td onclick='colorChanger(1)'></td>
+            <td onclick='colorChanger(2)'></td>
+            <td onclick='colorChanger(3)'></td>
+            <td onclick='colorChanger(4)'></td>
+            <td onclick='colorChanger(5)'></td>
+            <td onclick='colorChanger(6)'></td>
+        </tr>
+        <tr>
+            <td onclick='colorChanger(0)'></td>
+            <td onclick='colorChanger(1)'></td>
+            <td onclick='colorChanger(2)'></td>
+            <td onclick='colorChanger(3)'></td>
+            <td onclick='colorChanger(4)'></td>
+            <td onclick='colorChanger(5)'></td>
+            <td onclick='colorChanger(6)'></td>
+        </tr>
+        <tr>
+            <td onclick='colorChanger(0)'></td>
+            <td onclick='colorChanger(1)'></td>
+            <td onclick='colorChanger(2)'></td>
+            <td onclick='colorChanger(3)'></td>
+            <td onclick='colorChanger(4)'></td>
+            <td onclick='colorChanger(5)'></td>
+            <td onclick='colorChanger(6)'></td>
+        </tr>
+    </table>
+</div>      
