@@ -65,7 +65,7 @@
             }
         }
         column_check = column, row_check = row, stop_word = '';
-        while(column_check < 5 && stop_word != 'stop'){ // Tel stenen rechts
+        while(column_check < 6 && stop_word != 'stop'){ // Tel stenen rechts
             column_check += 1
             if (colorChecker(row, column_check) == color){
                 stenen_rechts += 1
@@ -76,7 +76,6 @@
         } 
         
         column_check = column, row_check = row, stop_word = '';
-        console.log(row_check)
         while(row_check < 5 && stop_word != 'stop'){ // Tel stenen onder
             row_check += 1
             if (colorChecker(row_check, column) == color){
@@ -87,7 +86,57 @@
             }
         } 
 
-        if(stenen_links + stenen_rechts > 2 || stenen_onder >= 3){ // Vier op een rij
+        // !!!!!!!!!!!!!!!!!!!! HIER KOMT DE VERTICALE CHECK
+        stenen_links_boven = 0, stenen_links_onder = 0, stenen_rechts_boven = 0, stenen_rechts_onder = 0
+        column_check = column, row_check = row, stop_word = '';
+        while(row_check > 0 && column_check > 0 && stop_word != 'stop'){ // Tel stenen links boven
+            row_check -= 1
+            column_check -= 1
+            if (colorChecker(row_check, column_check) == color){
+                stenen_links_boven += 1
+            }
+            else {
+                stop_word = 'stop'
+            }
+        }
+        column_check = column, row_check = row, stop_word = '';
+        while(row_check > 0 && column_check < 6 && stop_word != 'stop'){ // Tel stenen rechts boven
+            row_check -= 1
+            column_check += 1
+            if (colorChecker(row_check, column_check) == color){
+                stenen_rechts_boven += 1
+            }
+            else {
+                stop_word = 'stop'
+            }
+        }
+        column_check = column, row_check = row, stop_word = '';
+        while(row_check < 5 && column_check < 6 && stop_word != 'stop'){ // Tel stenen rechts onder
+            row_check += 1
+            column_check += 1
+            if (colorChecker(row_check, column_check) == color){
+                stenen_rechts_onder += 1
+            }
+            else {
+                stop_word = 'stop'
+            }
+        }
+        column_check = column, row_check = row, stop_word = '';
+        while(row_check < 5 && column_check > 0 && stop_word != 'stop'){ // Tel stenen links onder
+            row_check += 1
+            column_check -= 1
+            console.log(row_check, column_check)
+            if (colorChecker(row_check, column_check) == color){
+                stenen_links_onder += 1
+            }
+            else {
+                stop_word = 'stop'
+            }
+        }
+
+        console.log('links onder, links boven, rechts onder, rechtsboven\n' + stenen_links_onder + stenen_links_boven + stenen_rechts_onder + stenen_rechts_boven)
+
+        if(stenen_links + stenen_rechts >= 3 || stenen_onder >= 3 || stenen_links_onder + stenen_rechts_boven >= 3 || stenen_links_boven + stenen_rechts_onder >= 3){ // Vier op een rij
             document.getElementById("winnaar_tekst").style.backgroundColor = color
             document.getElementById("winnaar_tekst").innerHTML = ("Speler " + player + " heeft gewonnen!");
         }
