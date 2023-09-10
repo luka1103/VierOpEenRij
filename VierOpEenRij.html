@@ -8,11 +8,17 @@
         font-size: 40px;
         text-align: center;
     }
+    p{
+        text-transform: uppercase;
+        font-family: Verdana;
+        font-size: 30px;
+        text-align: center;
+    }
     table, tr, td {
         border: 1px solid black;
         height: 70px;
         border-collapse: collapse;
-        border-width: 7px;
+        border-width: 8px;
         border-color: #123456;
         margin-left: auto;
         margin-right: auto;
@@ -46,30 +52,45 @@
     }
 
     function winner(player, color, row, column) {
+        winnaar = false
         var x = document.getElementById("table");
-        stenen_links = 0, stenen_rechts = 0, column_check = column, row_check = row, stop_word = '';
-        while(column_check > 0 && stop_word != 'stop'){
+        stenen_links = 0, stenen_rechts = 0, stenen_onder = 0, column_check = column, row_check = row, stop_word = '';
+        while(column_check > 0 && stop_word != 'stop'){ // Tel stenen links
             column_check -= 1
-            if (colorChecker(row, column_check) == ''){
-                stop_word = 'stop'
-            }
             if (colorChecker(row, column_check) == color){
                 stenen_links += 1
             }
-        }
-        column_check = column, row_check = row, stop_word = '';
-        while(column_check < 6 && stop_word != 'stop'){
-            column_check += 1
-            if (colorChecker(row, column_check) == ''){
+            else {
                 stop_word = 'stop'
             }
+        }
+        column_check = column, row_check = row, stop_word = '';
+        while(column_check < 5 && stop_word != 'stop'){ // Tel stenen rechts
+            column_check += 1
             if (colorChecker(row, column_check) == color){
                 stenen_rechts += 1
             }
+            else {
+                stop_word = 'stop'
+            }
         } 
-       if(stenen_links + stenen_rechts > 2){
-        console.log('Winnaar!')
-       }
+        
+        column_check = column, row_check = row, stop_word = '';
+        console.log(row_check)
+        while(row_check < 5 && stop_word != 'stop'){ // Tel stenen onder
+            row_check += 1
+            if (colorChecker(row_check, column) == color){
+                stenen_onder += 1
+            }
+            else {
+                stop_word = 'stop'
+            }
+        } 
+
+        if(stenen_links + stenen_rechts > 2 || stenen_onder >= 3){ // Vier op een rij
+            document.getElementById("winnaar_tekst").style.backgroundColor = color
+            document.getElementById("winnaar_tekst").innerHTML = ("Speler " + player + " heeft gewonnen!");
+        }
         
     }
 </script>
@@ -132,4 +153,5 @@
             <td onclick='colorChanger(6)'></td>
         </tr>
     </table>
+    <p id="winnaar_tekst"></p>
 </div>      
