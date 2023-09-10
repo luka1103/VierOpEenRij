@@ -5,14 +5,17 @@
     h1 {
         text-transform: uppercase;
         font-family: Verdana;
-        font-size: 37px;
+        font-size: 40px;
+        text-align: center;
     }
     table, tr, td {
         border: 1px solid black;
-        height: 50px;
+        height: 70px;
         border-collapse: collapse;
         border-width: 7px;
         border-color: #123456;
+        margin-left: auto;
+        margin-right: auto;
     }
     td:hover {
         background-color: #98AFC7;
@@ -20,21 +23,60 @@
 </style>
 
 <script>
+    player = 1
+    function colorChecker(row_number, column_number){
+        var x = document.getElementById("table").rows[row_number].cells[column_number]; // Choose cell
+        return x.style.backgroundColor; // Return its color
+    }
     function colorChanger(column_number) {
-        var row_number = 5
-        var x = document.getElementById("table").rows[row_number].cells[column_number];
-        console.log(x.style.backgroundColor)
-        while(x.style.backgroundColor == "rgb(255, 206, 68)"){
+        var row_number = 5 // Start checking highest row
+
+        while(colorChecker(row_number, column_number) != ""){
             row_number -= 1
-            var x = document.getElementById("table").rows[row_number].cells[column_number]
+        } // Choose lowest row without color
+
+        color_code = ["rgb(255, 206, 68)", "rgb(229, 91, 60)"][player - 1] // Select color code
+
+        var x = document.getElementById("table").rows[row_number].cells[column_number];
+        x.style.backgroundColor = color_code; // Change color of cell
+
+        winner(player, color_code, row_number, column_number)
+
+        player = [2, 1][player - 1] // Select next player
+    }
+
+    function winner(player, color, row, column) {
+        var x = document.getElementById("table");
+        stenen_links = 0, stenen_rechts = 0, column_check = column, row_check = row, stop_word = '';
+        while(column_check > 0 && stop_word != 'stop'){
+            column_check -= 1
+            if (colorChecker(row, column_check) == ''){
+                stop_word = 'stop'
+            }
+            if (colorChecker(row, column_check) == color){
+                stenen_links += 1
+            }
         }
-        x.style.backgroundColor = "rgb(255, 206, 68)";
+        column_check = column, row_check = row, stop_word = '';
+        while(column_check < 6 && stop_word != 'stop'){
+            column_check += 1
+            if (colorChecker(row, column_check) == ''){
+                stop_word = 'stop'
+            }
+            if (colorChecker(row, column_check) == color){
+                stenen_rechts += 1
+            }
+        } 
+       if(stenen_links + stenen_rechts > 2){
+        console.log('Winnaar!')
+       }
+        
     }
 </script>
 
 <div>
-    <h1>Vier op een rij</h1>
-    <table width=350px id='table'>
+    <br><h1>Vier op een rij</h1>
+    <table width=490px id='table'>
         <tr>
             <td onclick='colorChanger(0)'></td>
             <td onclick='colorChanger(1)'></td>
